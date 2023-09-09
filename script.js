@@ -44,13 +44,26 @@
     } else {
       $(this).removeClass("past present").addClass("future");
     }
-  })
+  });
   
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
+  //WHEN I refresh the page
+  //THEN the saved events persist
+
+  $(".time-block").each(function(){
+    // assign var to key from local storage 
+    var timeBlockId = $(this).attr("id");
+    //assign var to value from local storage
+    var userDescription = localStorage.getItem(timeBlockId);
+
+    if(userDescription){
+      $(this).find(".description").val(userDescription);
+    }
+  });
+
   // TODO: Add code to display the current date in the header of the page.
   //WHEN I open the planner
   //THEN the current day is displayed at the top of the calendar
