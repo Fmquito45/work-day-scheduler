@@ -10,7 +10,17 @@
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  //
+  //WHEN I click the save button for that time block
+  //THEN the text for that event is saved in local storage
+
+  $(".saveBtn").on("click", function(){
+    //get id value from parent on selected button child. will be assigned as key for local storage
+    var timeBlockId = $(this).parent().attr("id");
+    //get description from time block. will be assigned as value for local sotage
+    var userDescription = $(this).siblings(".description").val();
+    localStorage.setItem(timeBlockId, userDescription);
+  })
+  
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
@@ -25,7 +35,7 @@
   $('.time-block').each(function(){
     //gets hour value of time block
     var blockHour = parseInt($(this).attr("id").split("-")[1]);
-    //confirm 24 hr time value
+    //confirm 24 hr time value for each time block
     //console.log(blockHour);
     if (blockHour < currentHour){
       $(this).removeClass("present future").addClass("past");
